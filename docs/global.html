@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: execute</title>
+    <title>JSDoc: Global</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: execute</h1>
+    <h1 class="page-title">Global</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>execute<span class="signature">(operations)</span><span class="type-signature"> &rarr; {Operation}</span></h2>
+        <h2></h2>
         
     
 </header>
@@ -38,10 +38,73 @@
     
         
 
+        
+
+
+<dl class="details">
+
     
 
     
-    <h4 class="name" id="execute"><span class="type-signature"></span>new execute<span class="signature">(operations)</span><span class="type-signature"> &rarr; {Operation}</span></h4>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="postData"><span class="type-signature"></span>postData<span class="signature">(params)</span><span class="type-signature"> &rarr; {Operation}</span></h4>
     
 
     
@@ -49,8 +112,7 @@
 
 
 <div class="description">
-    Execute a sequence of operations.
-Wraps `language-common/execute`, and prepends initial state for http.
+    Make a POST request with a certificate
 </div>
 
 
@@ -86,13 +148,13 @@ Wraps `language-common/execute`, and prepends initial state for http.
 
         <tr>
             
-                <td class="name"><code>operations</code></td>
+                <td class="name"><code>params</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Operations</span>
+<span class="param-type">object</span>
 
 
             
@@ -102,7 +164,7 @@ Wraps `language-common/execute`, and prepends initial state for http.
 
             
 
-            <td class="description last">Operations to be performed.</td>
+            <td class="description last">Url, Headers and Body parameters</td>
         </tr>
 
     
@@ -143,7 +205,7 @@ Wraps `language-common/execute`, and prepends initial state for http.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line89">line 89</a>
+        <a href="Adaptor.js.html">Adaptor.js</a>, <a href="Adaptor.js.html#line123">line 123</a>
     </li></ul></dd>
     
 
@@ -192,30 +254,21 @@ Wraps `language-common/execute`, and prepends initial state for http.
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>execute(
-  create('foo'),
-  delete('bar')
-)(state)</code></pre>
+    <pre class="prettyprint"><code>postData({
+ url: urlDTP,
+ body: obj,
+ headers: {
+   'Ocp-Apim-Subscription-Key': configuration['Ocp-Apim-Subscription-Key'],
+ },
+ agentOptions: {
+   key,
+   cert,
+ },
+})(state)</code></pre>
 
 
 
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
+        
     
 
     
