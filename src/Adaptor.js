@@ -3,9 +3,8 @@ import {
   execute as commonExecute,
   composeNextState,
   expandReferences,
-} from 'language-common';
-import axios from 'axios';
-import { resolve } from 'path';
+  http,
+} from '@openfn/language-common';
 
 /**
  * Execute a sequence of operations.
@@ -34,50 +33,51 @@ export function execute(...operations) {
 }
 
 /**
- * Make a POST request
+ * Make a POST request with a certificate
  * @public
  * @example
- * execute(
- *   post(params)
- * )(state)
- * @constructor
- * @param {object} params - data to make the fetch
+ * postData({
+ *  url: urlDTP,
+ *  body: obj,
+ *  headers: {
+ *    'Ocp-Apim-Subscription-Key': configuration['Ocp-Apim-Subscription-Key'],
+ *  },
+ *  agentOptions: {
+ *    key,
+ *    cert,
+ *  },
+ * })(state)
+ * @function
+ * @param {object} params - Url, Headers and Body parameters
  * @returns {Operation}
  */
-export function post(params, callback) {
+export function postData(params, callback) {
   return state => {
-    const { baseUrl, username, password } = state.configuration;
-    const { url, body, headers } = expandReferences(params)(state);
+    const { url, body, headers, agentOptions } = expandReferences(params)(
+      state
+    );
 
-    return axios({
-      method: 'post',
-      headers: {},
-      params: {},
-      baseURL,
-      url,
-      data: body,
-      auth: { username, password },
-    })
+    return http
+      .post({
+        method: 'post',
+        url,
+        data: body,
+        headers,
+        agentOptions,
+      })(state)
       .then(response => {
-        console.log(
-          'Printing response...\n',
-          JSON.stringify(response, null, 4) + '\n',
-          'POST succeeded.'
-        );
+        console.log('POST succeeded.');
 
         const nextState = composeNextState(state, response);
-        if (callback) resolve(callback(nextState));
-        resolve(nextState);
+        if (callback) return callback(nextState);
+        return nextState;
       })
       .catch(error => {
         console.log(error);
-        reject(error);
+        return error;
       });
   };
 }
-
-// Note that we expose the entire axios package to the user here.
-exports.axios = axios;
 
 // What functions do you want from the common adaptor?
 export {
@@ -87,7 +87,8 @@ export {
   each,
   field,
   fields,
+  http,
   lastReferenceValue,
   merge,
   sourceValue,
-} from 'language-common';
+} from '@openfn/language-common';
