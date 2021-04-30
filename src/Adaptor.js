@@ -49,6 +49,7 @@ export function execute(...operations) {
  * }, callback)(state)
  * @function
  * @param {object} params - Url, Headers and Body parameters
+ * @param {function} callback - (Optional) A callback function
  * @returns {Operation}
  */
 export function postData(params, callback) {
