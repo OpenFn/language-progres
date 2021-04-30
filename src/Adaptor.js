@@ -46,7 +46,7 @@ export function execute(...operations) {
  *    key,
  *    cert,
  *  },
- * })(state)
+ * }, callback)(state)
  * @function
  * @param {object} params - Url, Headers and Body parameters
  * @returns {Operation}
